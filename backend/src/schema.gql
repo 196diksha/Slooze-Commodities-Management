@@ -1,0 +1,72 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthUser {
+  id: Float!
+  email: String!
+  role: Role!
+}
+
+enum Role {
+  MANAGER
+  STORE_KEEPER
+}
+
+type AuthResponse {
+  accessToken: String!
+  user: AuthUser!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  sku: String!
+  category: String
+  quantity: Int!
+  unitPrice: Float!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DashboardStats {
+  totalProducts: Int!
+  totalQuantity: Int!
+  totalInventoryValue: Float!
+}
+
+type Query {
+  products: [Product!]!
+  dashboardStats: DashboardStats!
+}
+
+type Mutation {
+  login(input: LoginInput!): AuthResponse!
+  register(input: RegisterInput!): AuthResponse!
+  upsertProduct(input: UpsertProductInput!): Product!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  role: Role
+}
+
+input UpsertProductInput {
+  id: String
+  name: String!
+  sku: String!
+  category: String
+  quantity: Int!
+  unitPrice: Float!
+}
