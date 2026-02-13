@@ -14,7 +14,25 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: (
+      origin: string | undefined,
+      callback: (error: Error | null, allow?: boolean) => void,
+    ) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      const allowedExact = ['http://localhost:3000'];
+      const isVercelPreview = /\.vercel\.app$/.test(origin);
+
+      if (allowedExact.includes(origin) || isVercelPreview) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`CORS blocked for origin: ${origin}`), false);
+    },
     credentials: true,
   });
 
