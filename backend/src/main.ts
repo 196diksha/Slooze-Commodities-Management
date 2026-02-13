@@ -23,7 +23,11 @@ async function bootstrap() {
         return;
       }
 
+      const frontendUrl = process.env.FRONTEND_URL;
       const allowedExact = ['http://localhost:3000'];
+      if (frontendUrl) {
+        allowedExact.push(frontendUrl);
+      }
       const isVercelPreview = /\.vercel\.app$/.test(origin);
 
       if (allowedExact.includes(origin) || isVercelPreview) {
