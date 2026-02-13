@@ -32,7 +32,7 @@ export default function ProductsPage() {
         </div>
       </div>
       <div className="mb-1 flex items-center justify-between">
-        <h2 className="text-2xl font-extrabold">Product Inventory</h2>
+        <h2 className="text-2xl font-extrabold">All Products</h2>
         <Link href="/products/new" className="hidden rounded-lg px-3 py-2 text-sm font-semibold text-white sm:block" style={{ background: 'linear-gradient(120deg, var(--primary), #1d93d8)' }}>
           Add Product
         </Link>
